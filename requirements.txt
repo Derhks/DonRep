@@ -7,6 +7,7 @@ decorator==5.0.9
 fastapi==0.68.1
 future==0.18.2
 geographiclib==1.52
+gunicorn==20.1.0
 h11==0.12.0
 httptools==0.2.0
 idna==3.2
