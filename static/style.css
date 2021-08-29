@@ -1,0 +1,29 @@
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    align-items: center;
+}
+
+#search {
+    margin: 25px 70px;
+}
+
+#search-bar {
+    padding: 2.3vh;
+    width: 42vw;
+    height: 0.6vh;
+}
+
+#search-button {
+    padding: .32rem;
+    width: 5.7vw;
+    height: 5.8vh;
+}
+
+/* Set the size of the div element that contains the map */
+#map {
+    width: 75%;
+    height: 400px;
+    background-color: aqua;
+}

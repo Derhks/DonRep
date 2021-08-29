@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Film Locations in San Francisco</title>
+        <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
+        <script>
+            // Initialize and add the map
+            function initMap() {
+                const map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 11,
+                    center: { lat: 37.7725642, lng: -122.468628 },
+                });
+
+                // The marker
+                {% for movie in movie_locations %}
+                    const {{ movie['marker'] }} = new google.maps.Marker({
+                        position: { lat: {{ movie['lat'] }}, lng: {{ movie['lng'] }} },
+                        map: map,
+                        title: '{{ movie['title'] }}',
+                    });
+                {% endfor %}
+            }
+        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css"
+        rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="search">
+
+            <form action="/movie-locations" method="POST">
+                <input type="text" id="search-bar" name="title">
+                <input type="submit" value="Search" id="search-button">
+            </form>
+
+            <script>
+                $( function() {
+                    var availableTags = [
+                        {% for title in titles %}
+                            "{{title}}",
+                        {% endfor %}
+                    ];
+                    $( "#search-bar" ).autocomplete({
+                        source: availableTags
+                    });
+                });
+            </script>
+        </div>
+        <div id="map"></div>
+        <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+        <script
+                src="https://maps.googleapis.com/maps/api/js?key={{ API_KEY }}&callback=initMap&libraries=&v=weekly"
+                async
+        ></script>
+    </body>
+</html>
