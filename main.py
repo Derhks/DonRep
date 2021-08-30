@@ -2,6 +2,7 @@ from fastapi import Body, FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from pathlib import Path
 from settings import SODAPY_APPTOKEN, GOOGLE_API_KEY, SODAPY_DOMAIN, SODAPY_DATASET_IDENTIFIER
 from sodapy import Socrata
 from utils import get_coordinates
@@ -9,7 +10,9 @@ from utils import get_coordinates
 
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+BASE_DIR = Path(__file__).resolve().parent
+
+app.mount("/static", StaticFiles(directory=Path(BASE_DIR, 'static')), name="static")
 templates = Jinja2Templates(directory="templates")
 
 socrata_domain = SODAPY_DOMAIN
