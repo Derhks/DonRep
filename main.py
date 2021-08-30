@@ -1,5 +1,5 @@
 from fastapi import Body, FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from settings import SODAPY_APPTOKEN, GOOGLE_API_KEY, SODAPY_DOMAIN, SODAPY_DATASET_IDENTIFIER
@@ -29,7 +29,15 @@ def read_titles():
     return set(titles)
 
 
-@app.get('/home', response_class=HTMLResponse)
+@app.get('/status', response_class=JSONResponse)
+def read_server_status():
+    return {
+        'status': 'OK',
+        'api': 'v1'
+    }
+
+
+@app.get('/', response_class=HTMLResponse)
 def read_home_page(request: Request):
     titles = read_titles()
 
