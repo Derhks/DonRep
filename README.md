@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/Derhks/DonRep/branch/main/graph/badge.svg?token=TSSVOG5SPC)](https://codecov.io/gh/Derhks/DonRep)
+
 # DonRep
 Application that shows on a map the movies that have been filmed in San Francisco.
 
