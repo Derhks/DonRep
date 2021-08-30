@@ -13,7 +13,7 @@ app = FastAPI()
 BASE_DIR = Path(__file__).resolve().parent
 
 app.mount("/static", StaticFiles(directory=Path(BASE_DIR, 'static')), name="static")
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory=str(Path(BASE_DIR, 'templates')))
 
 socrata_domain = SODAPY_DOMAIN
 socrata_dataset_identifier = SODAPY_DATASET_IDENTIFIER
