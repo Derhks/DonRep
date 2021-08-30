@@ -4,10 +4,10 @@ from requests import get, exceptions
 from settings import GOOGLE_ENDPOINT, GOOGLE_API_KEY
 
 
-def get_coordinates(title: str) -> tuple:
+def get_coordinates(location: str) -> tuple:
     try:
-        title = title.replace(' ', '+')
-        url = GOOGLE_ENDPOINT + title + '&key=' + GOOGLE_API_KEY
+        location = location.replace(' ', '+')
+        url = GOOGLE_ENDPOINT + location + '&key=' + GOOGLE_API_KEY
         response = get(url=url)
 
         dict_body = json.loads(response.content.decode('utf-8'))
