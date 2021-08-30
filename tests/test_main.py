@@ -1,10 +1,20 @@
 import unittest
+import warnings
 
 from fastapi.testclient import TestClient
 from main import app, read_titles
 
 
+def ignore_warnings(test_func):
+    def do_test(self, *args, **kwargs):
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", ResourceWarning)
+            test_func(self, *args, **kwargs)
+    return do_test
+
+
 class TestMain(unittest.TestCase):
+    @ignore_warnings
     def test_read_titles(self):
         want = {
             'Cherish',
@@ -118,6 +128,7 @@ class TestMain(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(want, got)
 
+    @ignore_warnings
     def test_read_home_page(self):
         client = TestClient(app)
         response = client.get('/')
@@ -125,6 +136,7 @@ class TestMain(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.template.name, 'home.html')
 
+    @ignore_warnings
     def test_read_movies(self):
         client = TestClient(app)
         data = {'title': 'Alcatraz'}
