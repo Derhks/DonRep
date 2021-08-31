@@ -27,3 +27,13 @@ body {
     height: 400px;
     background-color: aqua;
 }
+
+ul {
+    list-style: none !important;
+    padding-inline-start: 0 !important;
+    height: auto !important;
+    background-color: #eeeeee !important;
+    border-radius: 2px !important;
+    font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif !important;
+    font-size: 1.1em !important;
+}
